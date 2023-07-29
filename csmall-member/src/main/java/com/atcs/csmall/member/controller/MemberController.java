@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.atcs.csmall.member.feign.FeignQuerymembercouponsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +28,17 @@ import com.atcs.common.utils.R;
  * @date 2023-07-29 19:07:32
  */
 @RestController
+@RefreshScope
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
     @Autowired
     private FeignQuerymembercouponsService querymembercouponsService;
+    @Value("${user.name}")
+    String username;
+    @Value("${user.sex}")
+    String usersex;
 
     /**
      * 列表
@@ -47,6 +54,11 @@ public class MemberController {
         MemberEntity member = memberService.getById(1L);
         R querymembercouponsed = querymembercouponsService.querymembercoupons();
         return R.ok(querymembercouponsed).put("member",member);
+    }
+
+    @RequestMapping("/getNacosConfigValue")
+    public R getNacosConfigValue(){
+        return R.ok().put("username",username).put("usersex",usersex);
     }
 
 
