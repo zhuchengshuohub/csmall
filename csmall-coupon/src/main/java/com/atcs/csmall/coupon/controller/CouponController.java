@@ -1,6 +1,7 @@
 package com.atcs.csmall.coupon.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class CouponController {
         return R.ok().put("page", page);
     }
 
+    @RequestMapping("/querymembercoupons/list")
+    public R querymembercoupons(){
+        CouponEntity byId = couponService.getById(1L);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("list",byId);
+        return R.ok(hashMap);
+    }
 
     /**
      * 信息

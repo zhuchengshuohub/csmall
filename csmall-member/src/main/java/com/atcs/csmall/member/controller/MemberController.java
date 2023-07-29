@@ -3,6 +3,7 @@ package com.atcs.csmall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.atcs.csmall.member.feign.FeignQuerymembercouponsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,8 @@ import com.atcs.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private FeignQuerymembercouponsService querymembercouponsService;
 
     /**
      * 列表
@@ -38,6 +41,12 @@ public class MemberController {
         PageUtils page = memberService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+    @RequestMapping("/queryMemeberCoupons")
+    private R queryMemeberCoupons(){
+        MemberEntity member = memberService.getById(1L);
+        R querymembercouponsed = querymembercouponsService.querymembercoupons();
+        return R.ok(querymembercouponsed).put("member",member);
     }
 
 
