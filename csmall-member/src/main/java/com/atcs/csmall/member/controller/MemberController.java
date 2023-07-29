@@ -28,7 +28,7 @@ import com.atcs.common.utils.R;
  * @date 2023-07-29 19:07:32
  */
 @RestController
-@RefreshScope
+//@RefreshScope
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
