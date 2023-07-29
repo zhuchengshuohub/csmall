@@ -24,5 +24,8 @@
 		<module>csmall-ware</module>
 		<module>csmall-product</module>
 		<module>csmall-order</module>
+		<module>renren-fast</module>
+		<module>renren-generator</module>
+		<module>csmall-common</module>
 	</modules>
 </project>
